@@ -40,7 +40,7 @@ Homepage = "https://github.com/seblemaguer/tsv2anki"
 Issues = "https://github.com/seblemaguer/tsv2anki/issues"
 git = "https://github.com/seblemaguer/tsv2anki.git"
 [project.scripts]
-flexeval = "tsv2anki.main:main"
+tsv2anki = "tsv2anki.__main__:main"
 
 [tool.black]
 line-length = 120
