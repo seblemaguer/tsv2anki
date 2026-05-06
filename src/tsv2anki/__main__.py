@@ -30,7 +30,7 @@ from tsv2anki.commands import words2anki
 ###############################################################################
 # global constants
 ###############################################################################
-LEVEL = [logging.WARNING, logging.INFO, logging.DEBUG]
+LEVEL = [logging.INFO, logging.DEBUG]
 
 ###############################################################################
 # Functions
@@ -114,21 +114,6 @@ def define_argument_parser() -> argparse.ArgumentParser:
     )
 
     parser.add_argument(
-        "--filter-known",
-        "-k",
-        type=str,
-        default=None,
-        help="Filter out the known/unkown considering the score (e.g., <2 or >3 or =3)"
-    )
-
-    parser.add_argument(
-        "--filter-needed",
-        "-n",
-        type=str,
-        default=None,
-        help="Filter out the needed/unneeded considering the score (e.g., <2 or >3 or =3)"
-    )
-    parser.add_argument(
         "--with-multimedia",
         "-m",
         action="store_true",
@@ -141,8 +126,6 @@ def define_argument_parser() -> argparse.ArgumentParser:
 
     # Return parser
     return parser
-
-
 
 
 ###############################################################################
