@@ -13,7 +13,7 @@ from tsv2anki.helpers.theme import (
 ANKI_URL = "http://localhost:8765"
 
 CATEGORIES = ["Word", "Grammar", "Cultural", "Phrase"]
-
+DECK_PATH_SEP = "::"
 
 class AnkiConnector:
     def __init__(self):
@@ -77,10 +77,19 @@ class AnkiConnector:
 
         return name
 
+    def ensure_deck(self, deck_path: str|list[str]):
+        if isinstance(deck_path, list):
+            deck_path = DECK_PATH_SEP.join(deck)
+
+        available_decks = self.invoke("deckNamesAndIds")
+        if deck_path not in available_decks:
+            self.invoke("createDeck", deck=deck_path)
+
+
     def find_note(self, note_id):
         return self.invoke("findNotes", query=f'"{note_id}"')
 
-    def upsert_basic(self, deck, model, fields, dry):
+    def upsert_basic(self, category: str, subdeck_path: str|list[str], model: str, fields: dict[str, str], dry_run: bool):
 
         logger = logging.getLogger("common")
 
@@ -90,13 +99,23 @@ class AnkiConnector:
         found = self.find_note(nid)
         fields["ID"] = nid
 
+
         if found:
             self.logger.info(f"update: {nid}")
-            if not dry:
+            if not dry_run:
                 self.invoke("updateNoteFields", note={"id": found[0], "fields": fields})
         else:
-            logger.info(f"add: {nid}")
-            if not dry:
+
+
+            deck = [category]
+            if isinstance(subdeck_path, str):
+                deck.append(subdeck_path)
+            else:
+                deck += subdeck_path
+            deck = DECK_PATH_SEP.join(deck)
+            logger.info(f"add: {nid} into {deck}")
+            if not dry_run:
+                self.ensure_deck(deck)
                 self.invoke(
                     "addNote", note={"deckName": deck, "modelName": model, "fields": fields, "tags": fields["tags"]}
                 )

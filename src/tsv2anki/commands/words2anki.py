@@ -76,4 +76,4 @@ def main(args: argparse.Namespace):
                 "tags": ["words", category.replace(" ", "_").lower()] + tags,
             }
 
-            anki_connector.upsert_basic(args.deck, basic_model, fields, args.dry_run)
+            anki_connector.upsert_basic("Word", args.deck, basic_model, fields, args.dry_run)
