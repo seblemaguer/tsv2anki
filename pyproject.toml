@@ -24,10 +24,8 @@ dependencies = [
    "typing_extensions",
    "pillow",
    "fastcore",
-   "duckduckgo_search",
    "pandas",
    "tqdm",
-   "genanki",
    "requests"
 ]
 [project.optional-dependencies]
