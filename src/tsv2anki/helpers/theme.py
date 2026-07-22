@@ -15,6 +15,7 @@ BACK_TEMPLATE = """
   <div class="example">{{Example}}</div>
   <hr>
   <div class="back">{{Back}}</div>
+  <div class="example">{{TranslatedExample}}</div>
 </div>
 """
 
@@ -22,7 +23,7 @@ FLIPPED_FRONT_TEMPLATE = """
 <div class="card" style="background-color: {{CategoryColor}}">
   <div class="header" style="color: {{SubCategoryColor}};">{{SubCategory}}</div>
   <div class="front">{{Back}}</div>
-  <div class="example">{{Example}}</div>
+  <div class="example">{{TranslatedExample}}</div>
 </div>
 """
 
@@ -30,9 +31,10 @@ FLIPPED_BACK_TEMPLATE = """
 <div class="card" style="background-color: {{CategoryColor}}">
   <div class="header" style="color: {{SubCategoryColor}};">{{SubCategory}}</div>
   <div class="front">{{Back}}</div>
-  <div class="example">{{Example}}</div>
+  <div class="example">{{TranslatedExample}}</div>
   <hr>
   <div class="back">{{Front}}</div>
+  <div class="example">{{Example}}</div>
 </div>
 """
 
